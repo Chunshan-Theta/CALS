@@ -1,0 +1,255 @@
+---
+swagger: "2.0"
+info:
+  description: "for CLAS"
+  version: "1.0.0"
+  title: "CLAS"
+  termsOfService: ""
+  contact:
+    name: "Developer Gavin"
+    email: "gavin19950511@gmail.com"
+  license:
+    name: "Apache 2.0"
+host: "localhost:8080"
+basePath: "/CLAS"
+tags:
+- name: "teacher"
+  description: "teachers are the main user of this system."
+- name: "event"
+  description: "created by the member."
+- name: "tester"
+  description: "student of joining the event."
+- name: "record"
+  description: "it's log of tester and member"
+schemes:
+- "http"
+paths:
+  /member:
+    get:
+      tags:
+      - "teacher"
+      summary: "getting data of member."
+      description: "usually for logining method or getting a member's data."
+      operationId: "memberGET"
+      parameters:
+      - name: "mid"
+        in: "query"
+        description: "md5(mid)"
+        required: false
+        type: "string"
+      - name: "account"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "passwords"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/member"
+      x-swagger-router-controller: "Teacher"
+  /event:
+    get:
+      tags:
+      - "event"
+      summary: "getting a event's data"
+      description: ""
+      operationId: "eventGET"
+      parameters:
+      - name: "eid"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "mid"
+        in: "query"
+        description: "this is for search all the events of the member."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/event"
+      x-swagger-router-controller: "Event"
+    post:
+      tags:
+      - "event"
+      summary: "creating a event"
+      description: ""
+      operationId: "eventPOST"
+      parameters:
+      - in: "body"
+        name: "event"
+        required: false
+        schema:
+          $ref: "#/definitions/event"
+      responses:
+        200:
+          description: "OK"
+      x-swagger-router-controller: "Event"
+  /tester:
+    get:
+      tags:
+      - "tester"
+      summary: " getting a tester "
+      description: ""
+      operationId: "testerGET"
+      parameters:
+      - name: "mail"
+        in: "query"
+        description: "if for searching all the tester of events, please typing 'NULL'\
+          \ or keep blank."
+        required: false
+        type: "string"
+      - name: "eid"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/tester"
+      x-swagger-router-controller: "Tester"
+    post:
+      tags:
+      - "tester"
+      summary: " create a tester "
+      description: ""
+      operationId: "testerPOST"
+      parameters:
+      - in: "body"
+        name: "tester"
+        required: false
+        schema:
+          $ref: "#/definitions/tester"
+      responses:
+        200:
+          description: "OK"
+      x-swagger-router-controller: "Tester"
+    put:
+      tags:
+      - "tester"
+      summary: "update tester's data"
+      description: "it's only for settle tester to chatroom."
+      operationId: "testerPUT"
+      parameters:
+      - in: "body"
+        name: "testers"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/testers"
+      responses:
+        200:
+          description: "OK"
+      x-swagger-router-controller: "Tester"
+  /action/tester:
+    post:
+      tags:
+      - "record"
+      summary: ""
+      description: ""
+      operationId: "actionTesterPOST"
+      parameters:
+      - in: "body"
+        name: "log"
+        required: true
+        schema:
+          $ref: "#/definitions/log"
+      responses:
+        200:
+          description: "OK"
+      x-swagger-router-controller: "Record"
+definitions:
+  member:
+    type: "object"
+    properties:
+      mid:
+        type: "string"
+        description: "md5(mid)"
+      account:
+        type: "string"
+      passwords:
+        type: "string"
+      name:
+        type: "string"
+      department:
+        type: "string"
+    description: "member object. containing member's data"
+    example:
+      mid: "4e732ced3463d06de0ca9a15b6153677"
+      account: "description"
+      passwords: "title"
+      name: "Theta Wang"
+      department: "NLT"
+  event:
+    type: "object"
+    properties:
+      eid:
+        type: "string"
+        description: "md5(eid). if this object is using for creating a new event,\
+          \ please typing 'NULL' or keeping blank."
+      mid:
+        type: "string"
+        description: "md5(mid)."
+      title:
+        type: "string"
+      question:
+        type: "string"
+        description: "is for identify stuent's thought"
+      status:
+        type: "integer"
+        description: "using 1,0 to show the event is on or off"
+    description: "event object is created by the member. And it containing event's\
+      \ data. (but testers' data would not be containing)"
+    example:
+      eid: "4e732ced3463d06de0ca9a15b6153677"
+      mid: "4e732ced3463d06de0ca9a15b6153677"
+      title: "using nuclear to generate electric power in Taiwan?"
+      question: "do you agree that using nuclear to generate electric power in Taiwan?"
+      status: 1
+  tester:
+    type: "object"
+    properties:
+      mail:
+        type: "string"
+      eid:
+        type: "string"
+        description: "md5(eid)."
+      chatroomTag:
+        type: "string"
+      log:
+        type: "string"
+      questionAnswer:
+        type: "integer"
+        description: "only using 1,0 to identify tester (student) now. But in future\
+          \ could be complexified."
+    description: "tester object is student that join the event."
+    example:
+      mail: "gavin19950511@gmail.com"
+      eid: "4e732ced3463d06de0ca9a15b6153677"
+      chatroomTag: "23"
+      log: ""
+      questionAnswer: 0
+  testers:
+    properties:
+      mail:
+        type: "string"
+      eid:
+        type: "string"
+      chatroomTag:
+        type: "string"
+  log:
+    type: "object"
+    properties:
+      mail:
+        type: "string"
+      type:
+        type: "string"
+      content:
+        type: "string"
