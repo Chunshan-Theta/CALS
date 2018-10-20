@@ -108,16 +108,42 @@ module.exports.testerPUT = function testerPUT (req, res, next) {
   var testers = req.swagger.params['testers'].value;
   Tester.testerPUT(testers)
     .then(function (response) {
-      var tids = [];
-      for(var i in testers){
-        var unitTester = testers[i];
-        tids.push(unitTester['eid']+"-"+unitTester['mail']);
 
-      }
-      console.log(tids);
-      utils.writeJson(res, response);
+      reInsertTester(testers,function(re){
+          utils.writeJson(res, re);
+      });
     })
     .catch(function (response) {
       utils.writeJson(res, response);
     });
 };
+
+function reInsertTester(testers,nextstep){
+  //INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `Log`, `questionAnswer`) VALUES ('1-s6@gmail.com', '1', NULL, '{}', '1');
+  //DELETE FROM `tester` WHERE `tester`.`tid` = '1-s6@gmail.com';
+  const connection1 = new sql('CALS');
+  var deleteSql = "DELETE FROM `tester` WHERE 0";
+  var reInsertSql = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `Log`, `questionAnswer`) VALUES ";
+  for(var i in testers){
+    var unitTester = testers[i];
+    var unitTid = unitTester['eid']+"-"+unitTester['mail'];
+    deleteSql +=" OR `tester`.`tid` = '"+unitTid+"'";
+
+    reInsertSql += '("'+unitTid+'", '+unitTester['eid']+', "'+unitTester['chatroomTag']+'", "'+unitTester['Log']+'", "'+unitTester['questionAnswer']+'"),';
+
+  }
+
+
+  reInsertSql = reInsertSql.substring(0,reInsertSql.length-1);
+  console.log(deleteSql);
+  console.log(reInsertSql);
+
+  connection1.query(deleteSql, function(returnValueDelete) {
+      const connection2 = new sql('CALS');
+      console.log(returnValueDelete);
+      connection2.query(reInsertSql, function(returnValueReInsert) {
+          console.log(returnValueReInsert);
+          nextstep(returnValueReInsert);
+      });
+  });
+}

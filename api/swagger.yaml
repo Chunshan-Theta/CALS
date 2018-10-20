@@ -157,10 +157,12 @@ paths:
       operationId: "actionTesterPOST"
       parameters:
       - in: "body"
-        name: "log"
+        name: "logs"
         required: true
         schema:
-          $ref: "#/definitions/log"
+          type: "array"
+          items:
+            $ref: "#/definitions/log"
       responses:
         200:
           description: "OK"
@@ -231,7 +233,7 @@ definitions:
     description: "tester object is student that join the event."
     example:
       mail: "gavin19950511@gmail.com"
-      eid: "1"
+      eid: 1
       chatroomTag: "23"
       log: ""
       questionAnswer: 0
@@ -254,7 +256,17 @@ definitions:
     properties:
       mail:
         type: "string"
+      eid:
+        type: "integer"
       type:
         type: "string"
       content:
         type: "string"
+      time:
+        type: "string"
+    example:
+      mail: "gavin19950511@gmail.com"
+      eid: 1
+      type: "read"
+      content: "title of reading"
+      time: "2018-10-21 03:32:54"
