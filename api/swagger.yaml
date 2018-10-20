@@ -10,7 +10,7 @@ info:
     email: "gavin19950511@gmail.com"
   license:
     name: "Apache 2.0"
-host: "localhost:8080"
+host: "localhost:3081"
 basePath: "/CLAS"
 tags:
 - name: "teacher"
@@ -34,7 +34,7 @@ paths:
       parameters:
       - name: "mid"
         in: "query"
-        description: "md5(mid)"
+        description: "mid"
         required: false
         type: "string"
       - name: "account"
@@ -173,7 +173,7 @@ definitions:
     properties:
       mid:
         type: "string"
-        description: "md5(mid)"
+        description: "mid"
       account:
         type: "string"
       passwords:
@@ -184,7 +184,7 @@ definitions:
         type: "string"
     description: "member object. containing member's data"
     example:
-      mid: "4e732ced3463d06de0ca9a15b6153677"
+      mid: "1"
       account: "description"
       passwords: "title"
       name: "Theta Wang"
@@ -195,10 +195,10 @@ definitions:
       eid:
         type: "integer"
         description: "if this object is using for creating a new event,\
-          \ please typing 'NULL' or keeping blank."
+          \ please typing 0 "
       mid:
         type: "string"
-        description: "md5(mid)."
+        description: "mid"
       title:
         type: "string"
       question:
@@ -210,8 +210,8 @@ definitions:
     description: "event object is created by the member. And it containing event's\
       \ data. (but testers' data would not be containing)"
     example:
-      eid: "1"
-      mid: "4e732ced3463d06de0ca9a15b6153677"
+      eid: 1
+      mid: "1"
       title: "using nuclear to generate electric power in Taiwan?"
       question: "do you agree that using nuclear to generate electric power in Taiwan?"
       status: 1

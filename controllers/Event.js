@@ -58,14 +58,14 @@ module.exports.eventPOST = function eventPOST (req, res, next) {
   Event.eventPOST(event)
     .then(function (response) {
       console.log(event);
-      if(event["eid"] == null || event["eid"] == 'NULL' || event["eid"] == ''){
+      if(event["eid"] == 0){
         insertEvent(event,function(re){
             utils.writeJson(res, re);
         });
 
 
       }else {
-        utils.writeJson(res, {"error":"'eid' please keep blank or typing 'NULL'"} ,400);
+        utils.writeJson(res, {"error":"'eid' please typing 0"} ,400);
 
       }
 

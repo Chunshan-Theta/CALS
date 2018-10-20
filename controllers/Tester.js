@@ -57,9 +57,8 @@ function selectTesterByEid(eid,nextstep){
   connection.query(querytext, function(returnValue) {
       for(var i in returnValue){
         var unitTester = returnValue[i];
-
-        unitTester['mail']=unitTester['tid'].substring(eid.length+1,unitTester['tid'].length);
-        unitTester['tid']=null;
+        unitTester['mail']=unitTester['tid'].substring(eid.toString().length+1,unitTester['tid'].length);
+        //unitTester['tid']=null;
       }
       nextstep(returnValue);
   });
