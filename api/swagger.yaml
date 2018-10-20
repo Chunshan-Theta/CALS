@@ -62,7 +62,7 @@ paths:
       - name: "eid"
         in: "query"
         required: false
-        type: "string"
+        type: "integer"
       - name: "mid"
         in: "query"
         description: "this is for search all the events of the member."
@@ -107,7 +107,7 @@ paths:
       - name: "eid"
         in: "query"
         required: true
-        type: "string"
+        type: "integer"
       responses:
         200:
           description: "OK"
@@ -191,8 +191,8 @@ definitions:
     type: "object"
     properties:
       eid:
-        type: "string"
-        description: "md5(eid). if this object is using for creating a new event,\
+        type: "integer"
+        description: "if this object is using for creating a new event,\
           \ please typing 'NULL' or keeping blank."
       mid:
         type: "string"
@@ -208,7 +208,7 @@ definitions:
     description: "event object is created by the member. And it containing event's\
       \ data. (but testers' data would not be containing)"
     example:
-      eid: "4e732ced3463d06de0ca9a15b6153677"
+      eid: "1"
       mid: "4e732ced3463d06de0ca9a15b6153677"
       title: "using nuclear to generate electric power in Taiwan?"
       question: "do you agree that using nuclear to generate electric power in Taiwan?"
@@ -219,8 +219,7 @@ definitions:
       mail:
         type: "string"
       eid:
-        type: "string"
-        description: "md5(eid)."
+        type: "integer"
       chatroomTag:
         type: "string"
       log:
@@ -232,7 +231,7 @@ definitions:
     description: "tester object is student that join the event."
     example:
       mail: "gavin19950511@gmail.com"
-      eid: "4e732ced3463d06de0ca9a15b6153677"
+      eid: "1"
       chatroomTag: "23"
       log: ""
       questionAnswer: 0
@@ -241,9 +240,15 @@ definitions:
       mail:
         type: "string"
       eid:
-        type: "string"
+        type: "integer"
       chatroomTag:
         type: "string"
+      log:
+        type: "string"
+      questionAnswer:
+        type: "integer"
+        description: "only using 1,0 to identify tester (student) now. But in future\
+          \ could be complexified."
   log:
     type: "object"
     properties:

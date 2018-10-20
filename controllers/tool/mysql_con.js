@@ -34,10 +34,10 @@ module.exports = function (db){
           //console.log(result);
           close(con)
           if (err){
-            callback(err);
+            callback(err,"bad request");
           }
           else {
-            callback(result);
+            callback(result,"succeed");
           }
         });
       });
