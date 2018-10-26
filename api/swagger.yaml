@@ -213,6 +213,8 @@ definitions:
         type: "string"
       log:
         type: "string"
+      needToRead:
+        type: "string"
     description: "event object is created by the member. And it containing event's\
       \ data. (but testers' data would not be containing)"
     example:
@@ -224,6 +226,8 @@ definitions:
       memo: "<html></html>"
       eventTime: "2018-09-28 16:00:00"
       log: 'createTime::20180928-211300,updateTime::20181030-110321'
+      needToRead: "<html></html>"
+
   tester:
     type: "object"
     properties:
