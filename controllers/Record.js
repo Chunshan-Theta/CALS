@@ -3,7 +3,7 @@
 var utils = require('../utils/writer.js');
 var Record = require('../service/RecordService');
 var sql = require('./tool/mysql_con.js');
-
+var textfilter = require('./tool/textFilter.js');
 module.exports.actionTesterPOST = function actionTesterPOST (req, res, next) {
   var logs = req.swagger.params['logs'].value;
   Record.actionTesterPOST(logs)
@@ -24,6 +24,7 @@ function insertAction(logs,nextstep){
   var querytext = "INSERT INTO `behaviorRcord` (`bid`, `tid`, `Type`, `content`, `log`, `time`) VALUES "
   for(var i in logs){
     var unitLog = logs[i];
+    unitLog['content'] = textfilter.sqlFilter(unitLog['content']);
     var unitTid = unitLog['eid']+'-'+unitLog['mail'];
     querytext += "(NULL, '"+unitTid+"', '"+unitLog['type']+"', '"+unitLog['content']+"', 'NULL', '"+unitLog['time']+"'),";
   }

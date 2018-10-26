@@ -3,6 +3,7 @@
 var utils = require('../utils/writer.js');
 var Event = require('../service/EventService');
 var sql = require('./tool/mysql_con.js');
+var textfilter = require('./tool/textFilter.js');
 module.exports.eventGET = function eventGET (req, res, next) {
   var eid = req.swagger.params['eid'].value;
   var mid = req.swagger.params['mid'].value;
@@ -84,6 +85,10 @@ function insertEvent(eventData,nextstep){
   const connection = new sql('CALS');
   //var querytext = "INSERT INTO `event` (`eid`, `mid`, `title`, `question`, `status`) VALUES (null, '"+eventData['mid']+"', '"+eventData['title']+"', '"+eventData['question']+"', '"+eventData['status']+"');";
   //INSERT INTO `event` (`eid`, `mid`, `title`, `question`, `status`, `memo`, `eventTime`, `log`) VALUES (NULL, '1', 'using nuclear to generate electric power in Taiwan?', 'do you agree that using nuclear to generate electric power in Taiwan?', '1', NULL, NULL, 'createTime::20180928-211300,updateTime::20181030-110321');
+  eventData['memo'] = textfilter.sqlFilter(eventData['memo']);
+  eventData['question'] = textfilter.sqlFilter(eventData['question']);
+  eventData['title'] = textfilter.sqlFilter(eventData['title']);
+  eventData['log'] = textfilter.sqlFilter(eventData['log']);
   var querytext = "INSERT INTO `event` (`eid`, `mid`, `title`, `question`, `status`, `memo`, `eventTime`, `log`) VALUES (null, '"+eventData['mid']+"', '"+eventData['title']+"', '"+eventData['question']+"', '"+eventData['status']+"', '"+eventData['memo']+"', '"+eventData['eventTime']+"', '"+eventData['log']+"');";
   console.log(querytext);
   connection.query(querytext, function(returnValue) {
