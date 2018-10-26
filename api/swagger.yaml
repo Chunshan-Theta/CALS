@@ -207,6 +207,12 @@ definitions:
       status:
         type: "integer"
         description: "using 1,0 to show the event is on or off"
+      memo:
+        type: "string"
+      eventTime:
+        type: "string"
+      log:
+        type: "string"
     description: "event object is created by the member. And it containing event's\
       \ data. (but testers' data would not be containing)"
     example:
@@ -215,6 +221,9 @@ definitions:
       title: "using nuclear to generate electric power in Taiwan?"
       question: "do you agree that using nuclear to generate electric power in Taiwan?"
       status: 1
+      memo: "<html></html>"
+      eventTime: "2018-09-27T16:00:00.000Z"
+      log: 'createTime::20180928-211300,updateTime::20181030-110321'
   tester:
     type: "object"
     properties:

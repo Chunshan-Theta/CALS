@@ -82,7 +82,9 @@ module.exports.eventPOST = function eventPOST (req, res, next) {
 
 function insertEvent(eventData,nextstep){
   const connection = new sql('CALS');
-  var querytext = "INSERT INTO `event` (`eid`, `mid`, `title`, `question`, `status`) VALUES (null, '"+eventData['mid']+"', '"+eventData['title']+"', '"+eventData['question']+"', '"+eventData['status']+"');";
+  //var querytext = "INSERT INTO `event` (`eid`, `mid`, `title`, `question`, `status`) VALUES (null, '"+eventData['mid']+"', '"+eventData['title']+"', '"+eventData['question']+"', '"+eventData['status']+"');";
+  //INSERT INTO `event` (`eid`, `mid`, `title`, `question`, `status`, `memo`, `eventTime`, `log`) VALUES (NULL, '1', 'using nuclear to generate electric power in Taiwan?', 'do you agree that using nuclear to generate electric power in Taiwan?', '1', NULL, NULL, 'createTime::20180928-211300,updateTime::20181030-110321');
+  var querytext = "INSERT INTO `event` (`eid`, `mid`, `title`, `question`, `status`, `memo`, `eventTime`, `log`) VALUES (null, '"+eventData['mid']+"', '"+eventData['title']+"', '"+eventData['question']+"', '"+eventData['status']+"', '"+eventData['memo']+"', '"+eventData['eventTime']+"', '"+eventData['log']+"');";
   console.log(querytext);
   connection.query(querytext, function(returnValue) {
       nextstep(returnValue);
