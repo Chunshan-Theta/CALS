@@ -89,7 +89,8 @@ function insertEvent(eventData,nextstep){
   eventData['question'] = textfilter.sqlFilter(eventData['question']);
   eventData['title'] = textfilter.sqlFilter(eventData['title']);
   eventData['log'] = textfilter.sqlFilter(eventData['log']);
-  var querytext = "INSERT INTO `event` (`eid`, `mid`, `title`, `question`, `status`, `memo`, `eventTime`, `log`) VALUES (null, '"+eventData['mid']+"', '"+eventData['title']+"', '"+eventData['question']+"', '"+eventData['status']+"', '"+eventData['memo']+"', '"+eventData['eventTime']+"', '"+eventData['log']+"');";
+  eventData['needToRead'] = textfilter.sqlFilter(eventData['needToRead']);
+  var querytext = "INSERT INTO `event` (`eid`, `mid`, `title`, `question`, `status`, `memo`, `eventTime`, `log`,`needToRead`) VALUES (null, '"+eventData['mid']+"', '"+eventData['title']+"', '"+eventData['question']+"', '"+eventData['status']+"', '"+eventData['memo']+"', '"+eventData['eventTime']+"', '"+eventData['log']+"','"+eventData['needToRead']+"');";
   console.log(querytext);
   connection.query(querytext, function(returnValue) {
       nextstep(returnValue);
