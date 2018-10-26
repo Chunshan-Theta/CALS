@@ -3,7 +3,7 @@
 var utils = require('../utils/writer.js');
 var Tester = require('../service/TesterService');
 var sql = require('./tool/mysql_con.js');
-
+var textfilter = require('./tool/textFilter.js');
 
 /////////////////////////////////////////////
 module.exports.testerGET = function testerGET (req, res, next) {
@@ -88,6 +88,7 @@ module.exports.testerPOST = function testerPOST (req, res, next) {
 
 function insertTester(testerData,nextstep){
   const connection = new sql('CALS');
+  testerData['mail'] = textfilter.sqlFilter(testerData['mail']);
   var tid  =testerData['eid']+'-'+testerData['mail'];
   var querytext = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `Log`, `questionAnswer`) VALUES ('"+tid+"', '"+testerData['eid']+"', NULL, '{}', '"+testerData['questionAnswer']+"');";
   console.log(querytext);
