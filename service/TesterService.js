@@ -2,10 +2,10 @@
 
 
 /**
- *  getting a tester 
- * 
+ *  getting a tester
  *
- * eid String 
+ *
+ * eid String
  * mail String if for searching all the tester of events, please typing 'NULL' or keep blank. (optional)
  * returns tester
  **/
@@ -29,13 +29,14 @@ exports.testerGET = function(eid,mail) {
 
 
 /**
- *  create a tester 
- * 
+ *  create a tester
+ *
  *
  * tester Tester  (optional)
  * no response value expected for this operation
  **/
 exports.testerPOST = function(tester) {
+  console.log('!!!!!!!!!!!!!!!!!!!!2');
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -46,7 +47,7 @@ exports.testerPOST = function(tester) {
  * update tester's data
  * it's only for settle tester to chatroom.
  *
- * testers List 
+ * testers List
  * no response value expected for this operation
  **/
 exports.testerPUT = function(testers) {
@@ -55,3 +56,17 @@ exports.testerPUT = function(testers) {
   });
 }
 
+/**
+ * update tester's data
+ * it's only for settle tester to chatroom.
+ *
+ * testers List
+ * no response value expected for this operation
+ **/
+exports.testerOPTIONS = function(testers) {
+  console.log('!!!!!!!!!!!!!!!!!!!!1');
+  return new Promise(function(resolve, reject) {
+    console.log('!!!!!!!!!!!!!!!!!!!!1.1');
+    resolve();
+  });
+}

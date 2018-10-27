@@ -31,7 +31,7 @@ module.exports = function (db){
         if (err) throw err;
         con.query(sql, function (err, result, fields) {
 
-          //console.log(result);
+          console.log(result);
           close(con)
           if (err){
             callback(err,"bad request");
