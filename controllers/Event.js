@@ -58,6 +58,7 @@ module.exports.eventPOST = function eventPOST (req, res, next) {
   var event = req.swagger.params['event'].value;
   Event.eventPOST(event)
     .then(function (response) {
+      console.log("POST");
       console.log(event);
       if(event["eid"] == 0){
         insertEvent(event,function(re){
@@ -66,7 +67,7 @@ module.exports.eventPOST = function eventPOST (req, res, next) {
 
 
       }else {
-        utils.writeJson(res, {"error":"'eid' please typing 0"} ,400);
+        utils.writeJson(res, {"error":"'eid' please typing 0, event = "+JSON.stringify(event)} ,400);
 
       }
 

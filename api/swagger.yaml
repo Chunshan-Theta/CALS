@@ -90,6 +90,7 @@ paths:
         200:
           description: "OK"
       x-swagger-router-controller: "Event"
+
   /tester:
     get:
       tags:
@@ -148,6 +149,7 @@ paths:
         200:
           description: "OK"
       x-swagger-router-controller: "Tester"
+
   /action/tester:
     post:
       tags:

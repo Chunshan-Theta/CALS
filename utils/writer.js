@@ -38,6 +38,6 @@ var writeJson = exports.writeJson = function(response, arg1, arg2) {
   if(typeof payload === 'object') {
     payload = JSON.stringify(payload, null, 2);
   }
-  response.writeHead(code, {'Content-Type': 'application/json','Access-Control-Allow-Origin':'*'});
+  response.writeHead(code, {'Content-Type': 'application/json','Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'*','Access-Control-Allow-Methods':'GET, POST, DELETE, PUT, PATCH, OPTIONS'});
   response.end(payload);
 }
