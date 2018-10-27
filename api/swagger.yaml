@@ -58,6 +58,7 @@ paths:
       summary: "getting a event's data"
       description: ""
       operationId: "eventGET"
+
       parameters:
       - name: "eid"
         in: "query"
@@ -90,7 +91,16 @@ paths:
         200:
           description: "OK"
       x-swagger-router-controller: "Event"
-
+    options:
+      tags:
+      - "event"
+      summary: "creating a event"
+      description: ""
+      operationId: "eventOPTIONS"
+      responses:
+        200:
+          description: "OK"
+      x-swagger-router-controller: "Event"
   /tester:
     get:
       tags:

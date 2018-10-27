@@ -67,7 +67,7 @@ module.exports.eventPOST = function eventPOST (req, res, next) {
 
 
       }else {
-        utils.writeJson(res, {"error":"'eid' please typing 0, event = "+JSON.stringify(event)} ,400);
+        utils.writeJson(res, {"error":"'eid' please typing 0"} ,400);
 
       }
 
@@ -97,3 +97,28 @@ function insertEvent(eventData,nextstep){
       nextstep(returnValue);
   });
 }
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+//INSERT INTO `event` (`eid`, `mid`, `title`, `question`, `status`) VALUES (uuid(), '1', 'nuclear power', 'Do you agree?', '1');
+module.exports.eventOPTIONS = function eventOPTIONS (req, res, next) {
+  
+  Event.eventOPTIONS()
+    .then(function (response) {
+      
+      utils.writeJson(res, {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+        "Access-Control-Allow-Headers": "X-PINGOTHER, Content-Type",
+        "Access-Control-Max-Age":"86400"
+      });
+
+
+
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};

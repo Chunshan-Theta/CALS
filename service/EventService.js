@@ -42,3 +42,16 @@ exports.eventPOST = function(event) {
 }
 
 
+/**
+ * creating a event
+ * 
+ *
+ * event Event  (optional)
+ * no response value expected for this operation
+ **/
+exports.eventOPTIONS = function() {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
+
