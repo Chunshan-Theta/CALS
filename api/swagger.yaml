@@ -67,6 +67,16 @@ paths:
         200:
           description: "OK"
       x-swagger-router-controller: "Teacher"
+    options:
+      tags:
+      - "teacher"
+      summary: "for responds to the complex requests from browser."
+      description: ""
+      operationId: "memberOPTIONS"
+      responses:
+        200:
+          description: "OK"
+      x-swagger-router-controller: "Teacher"
   /event:
     get:
       tags:
@@ -110,7 +120,7 @@ paths:
     options:
       tags:
       - "event"
-      summary: "creating a event"
+      summary: "for responds to the complex requests from browser."
       description: ""
       operationId: "eventOPTIONS"
       responses:
@@ -178,7 +188,7 @@ paths:
     options:
       tags:
       - "tester"
-      summary: ""
+      summary: "for responds to the complex requests from browser."
       description: ""
       operationId: "testerOPTIONS"
       responses:

@@ -35,3 +35,10 @@ exports.memberPOST = function(member) {
     resolve();
   });
 }
+
+
+exports.memberOPTIONS = function() {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}

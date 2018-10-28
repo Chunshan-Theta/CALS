@@ -118,3 +118,16 @@ function createMember(member,nextstep){
 
   });
 }
+
+//////////////////////////////
+module.exports.memberOPTIONS = function memberOPTIONS (req, res, next) {
+
+  Teacher.memberOPTIONS()
+    .then(function (response) {
+      utils.writeJson(res, response);
+
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
