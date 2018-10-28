@@ -69,19 +69,16 @@ function selectTesterByEid(eid,nextstep){
 ///////////////////////////////////////////////
 //
 module.exports.testerPOST = function testerPOST (req, res, next) {
-  console.log('!!!!!!!!!!!!!!!!!!!!2.2');
+
   var tester = req.swagger.params['tester'].value;
 
   Tester.testerPOST(tester)
     .then(function (response) {
-      console.log('!!!!!!!!!!!!!!!!!!!!2.3');
       console.log(tester);
       insertTester(tester,function(re){
-        console.log('!!!!!!!!!!!!!!!!!!!!2.4');
 
           utils.writeJson(res, re);
       });
-      console.log('!!!!!!!!!!!!!!!!!!!!2.5');
 
 
     })
@@ -93,14 +90,10 @@ module.exports.testerPOST = function testerPOST (req, res, next) {
 
 
 function insertTester(testerData,nextstep){
-  console.log('!!!!!!!!!!!!!!!!!!!!2.4.1');
   const connection = new sql('CALS');
-  console.log('!!!!!!!!!!!!!!!!!!!!2.4.2');
   console.log(testerData['mail']);
   testerData['mail'] = textfilter.sqlFilter(testerData['mail']);
-  console.log('!!!!!!!!!!!!!!!!!!!!2.4.3');
   var tid  =testerData['eid']+'-'+testerData['mail'];
-  console.log('!!!!!!!!!!!!!!!!!!!!2.4.4');
   var querytext = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `Log`, `questionAnswer`) VALUES ('"+tid+"', '"+testerData['eid']+"', NULL, '{}', '"+testerData['questionAnswer']+"');";
   console.log(querytext);
   connection.query(querytext, function(returnValue) {
@@ -168,14 +161,12 @@ module.exports.testerOPTIONS = function testerOPTIONS (req, res, next) {
 
   Tester.testerOPTIONS()
     .then(function (response) {
-      console.log('!!!!!!!!!!!!!!!!!!!!1.2');
       utils.writeJson(res, {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
         "Access-Control-Allow-Headers": "X-PINGOTHER, Content-Type",
         "Access-Control-Max-Age":"86400"
       });
-      console.log('!!!!!!!!!!!!!!!!!!!!1.3');
 
 
     })

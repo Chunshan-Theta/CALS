@@ -3,6 +3,7 @@
 var utils = require('../utils/writer.js');
 var Teacher = require('../service/TeacherService');
 var sql = require('./tool/mysql_con.js');
+var textfilter = require('./tool/textFilter.js');
 
 
 
@@ -60,6 +61,60 @@ function selectMemberByLogin(account,passwords,nextstep){
       }else {
         nextstep({"alert":"not found user"});
       }
+
+  });
+}
+
+
+//////////////////////////////////////////////////
+
+module.exports.memberPOST = function memberPOST (req, res, next) {
+  var member = req.swagger.params['member'].value;
+  Teacher.memberPOST(member)
+    .then(function (response) {
+      if(member['mid']=='0'){
+        console.log(member);
+        createMember(member,function(re){
+          utils.writeJson(res, re);
+        });
+
+      }
+      else {
+        utils.writeJson(res, {
+          'error':'422 Unprocessable Entity. input is invalid.',
+          'valid input sample':{ mid: '0',
+                                 account: 'Somethihg String',
+                                 passwords: 'isPasswords',
+                                 name: 'userName',
+                                 department: 'userGroupName'
+                               },
+          'getting invalid input':member
+        },422);
+      }
+
+
+
+
+
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+
+function createMember(member,nextstep){
+  const connection = new sql('CALS');
+  var account = textfilter.sqlFilter(member['account']);
+  var passwords = textfilter.sqlFilter(member['passwords']);
+  var name = textfilter.sqlFilter(member['name']);
+  var department = textfilter.sqlFilter(member['department']);
+  var querytext = "INSERT INTO `member` (`mid`, `account`, `passwords`, `name`, `department`) VALUES (NULL, '"+account+"', '"+passwords+"', '"+name+"', '"+department+"');";
+
+  connection.query(querytext, function(returnValue) {
+
+          nextstep(returnValue);
+
 
   });
 }

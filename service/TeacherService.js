@@ -28,3 +28,10 @@ exports.memberGET = function(mid,account,passwords) {
   });
 }
 
+
+
+exports.memberPOST = function(member) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}

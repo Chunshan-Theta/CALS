@@ -10,7 +10,7 @@ info:
     email: "gavin19950511@gmail.com"
   license:
     name: "Apache 2.0"
-host: "140.115.126.216:3081"
+host: "localhost:3081"
 basePath: "/CLAS"
 tags:
 - name: "teacher"
@@ -50,6 +50,22 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/member"
+      x-swagger-router-controller: "Teacher"
+    post:
+      tags:
+      - "teacher"
+      summary: "create a member(Teacher)."
+      description: "create a member."
+      operationId: "memberPOST"
+      parameters:
+      - in: "body"
+        name: "member"
+        required: false
+        schema:
+          $ref: "#/definitions/member"
+      responses:
+        200:
+          description: "OK"
       x-swagger-router-controller: "Teacher"
   /event:
     get:
