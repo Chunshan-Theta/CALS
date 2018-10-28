@@ -10,7 +10,11 @@ info:
     email: "gavin19950511@gmail.com"
   license:
     name: "Apache 2.0"
+<<<<<<< HEAD
 host: "140.115.126.20:3081"
+=======
+host: "localhost:3081"
+>>>>>>> aee39c1e4309a02deb57a5c11a482079b22bad61
 basePath: "/CLAS"
 tags:
 - name: "teacher"
@@ -50,6 +54,32 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/member"
+      x-swagger-router-controller: "Teacher"
+    post:
+      tags:
+      - "teacher"
+      summary: "create a member(Teacher)."
+      description: "create a member."
+      operationId: "memberPOST"
+      parameters:
+      - in: "body"
+        name: "member"
+        required: false
+        schema:
+          $ref: "#/definitions/member"
+      responses:
+        200:
+          description: "OK"
+      x-swagger-router-controller: "Teacher"
+    options:
+      tags:
+      - "teacher"
+      summary: "for responds to the complex requests from browser."
+      description: ""
+      operationId: "memberOPTIONS"
+      responses:
+        200:
+          description: "OK"
       x-swagger-router-controller: "Teacher"
   /event:
     get:
@@ -94,7 +124,7 @@ paths:
     options:
       tags:
       - "event"
-      summary: "creating a event"
+      summary: "for responds to the complex requests from browser."
       description: ""
       operationId: "eventOPTIONS"
       responses:
@@ -162,7 +192,7 @@ paths:
     options:
       tags:
       - "tester"
-      summary: ""
+      summary: "for responds to the complex requests from browser."
       description: ""
       operationId: "testerOPTIONS"
       responses:
