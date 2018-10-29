@@ -3,7 +3,7 @@
 
 /**
  * getting a event's data
- * 
+ *
  *
  * eid String  (optional)
  * mid String this is for search all the events of the member. (optional)
@@ -30,7 +30,7 @@ exports.eventGET = function(eid,mid) {
 
 /**
  * creating a event
- * 
+ *
  *
  * event Event  (optional)
  * no response value expected for this operation
@@ -44,7 +44,7 @@ exports.eventPOST = function(event) {
 
 /**
  * creating a event
- * 
+ *
  *
  * event Event  (optional)
  * no response value expected for this operation
@@ -55,3 +55,8 @@ exports.eventOPTIONS = function() {
   });
 }
 
+exports.eventPUT = function(event) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
