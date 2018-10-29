@@ -36,3 +36,58 @@ function insertAction(logs,nextstep){
 }
 
 //INSERT INTO `behaviorRcord` (`bid`, `tid`, `Type`, `content`, `log`, `time`) VALUES (NULL, '1-gavin19950511@gmail.com', 'read', 'qweqweqweqwe', 'qweqwe,qweqweqwe,qweqweqwe,', CURRENT_TIMESTAMP);
+////////////////////////////////////////////////////////////
+
+module.exports.actionTesterGET = function actionTesterGET (req, res, next) {
+  var eid = req.swagger.params['eid'].value;
+  var mail = req.swagger.params['mail'].value;
+  var beforeTime = req.swagger.params['beforeTime'].value;
+  Record.actionTesterGET(eid,mail,beforeTime)
+    .then(function (response) {
+      if(mail!=null){
+        selectActionBymail(eid,mail,beforeTime,function(re){
+
+            utils.writeJson(res, re);
+        });
+      }else {
+        selectActionByeid(eid,beforeTime,function(re){
+            utils.writeJson(res, re);
+        });
+      }
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+function selectActionByeid(eid,beforeTime,nextstep){
+  const connection = new sql('CALS');
+  if(beforeTime!=null){
+    var querytext = "SELECT * FROM `behaviorRcord` WHERE `tid` LIKE '"+eid+"-%' AND `time` < '"+beforeTime+"'";
+  }else{
+    var querytext = "SELECT * FROM `behaviorRcord` WHERE `tid` LIKE '"+eid+"-%'";
+  }
+
+
+
+
+  connection.query(querytext, function(returnValue) {
+      nextstep(returnValue);
+  });
+}
+
+function selectActionBymail(eid,mail,beforeTime,nextstep){
+  const connection = new sql('CALS');
+  if(beforeTime!=null){
+    var querytext = "SELECT * FROM `behaviorRcord` WHERE `tid` LIKE '"+eid+"-"+mail+"%' AND `time` < '"+beforeTime+"'";
+  }else{
+    var querytext = "SELECT * FROM `behaviorRcord` WHERE `tid` LIKE '"+eid+"-"+mail+"%'";
+  }
+
+
+
+
+  connection.query(querytext, function(returnValue) {
+      nextstep(returnValue);
+  });
+}

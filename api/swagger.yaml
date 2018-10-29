@@ -212,6 +212,36 @@ paths:
           description: "OK"
       x-swagger-router-controller: "Tester"
   /action/tester:
+    get:
+      tags:
+      - "record"
+      summary: ""
+      description: ""
+      operationId: "actionTesterGET"
+      parameters:
+      - name: "eid"
+        in: "query"
+        description: ""
+        required: true
+        type: "integer"
+      - name: "mail"
+        in: "query"
+        description: ""
+        required: false
+        type: "string"
+      - name: "beforeTime"
+        in: "query"
+        description: "format like this 2018-10-21 23:59:59"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/respondsOfLog"
+      x-swagger-router-controller: "Record"
     post:
       tags:
       - "record"
@@ -230,6 +260,7 @@ paths:
         200:
           description: "OK"
       x-swagger-router-controller: "Record"
+
 definitions:
   member:
     type: "object"
@@ -343,6 +374,22 @@ definitions:
     example:
       mail: "gavin19950511@gmail.com"
       eid: 1
+      type: "read"
+      content: "title of reading"
+      time: "2018-10-21 03:32:54"
+  respondsOfLog:
+    type: "object"
+    properties:
+      tid:
+        type: "string"
+      type:
+        type: "string"
+      content:
+        type: "string"
+      time:
+        type: "string"
+    example:
+      tid: "1-gavin19950511@gmail.com"
       type: "read"
       content: "title of reading"
       time: "2018-10-21 03:32:54"

@@ -2,10 +2,10 @@
 
 
 /**
- * 
- * 
  *
- * log Log 
+ *
+ *
+ * log Log
  * no response value expected for this operation
  **/
 exports.actionTesterPOST = function(log) {
@@ -14,3 +14,8 @@ exports.actionTesterPOST = function(log) {
   });
 }
 
+exports.actionTesterGET = function(eid,mail,beforeTime) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
