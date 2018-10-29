@@ -10,11 +10,8 @@ info:
     email: "gavin19950511@gmail.com"
   license:
     name: "Apache 2.0"
-<<<<<<< HEAD
+
 host: "140.115.126.20:3081"
-=======
-host: "localhost:3081"
->>>>>>> aee39c1e4309a02deb57a5c11a482079b22bad61
 basePath: "/CLAS"
 tags:
 - name: "teacher"
