@@ -104,10 +104,10 @@ function insertEvent(eventData,nextstep){
 
 //INSERT INTO `event` (`eid`, `mid`, `title`, `question`, `status`) VALUES (uuid(), '1', 'nuclear power', 'Do you agree?', '1');
 module.exports.eventOPTIONS = function eventOPTIONS (req, res, next) {
-  
+
   Event.eventOPTIONS()
     .then(function (response) {
-      
+
       utils.writeJson(res, {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
@@ -122,3 +122,65 @@ module.exports.eventOPTIONS = function eventOPTIONS (req, res, next) {
       utils.writeJson(res, response);
     });
 };
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+module.exports.eventPUT = function eventPUT (req, res, next) {
+  var event = req.swagger.params['event'].value;
+  Event.eventPUT(event)
+    .then(function (response) {
+      if(event['mid']=='-1'){
+        console.log(event);
+
+        updateEvent(event,function(re){
+          utils.writeJson(res, re);
+        });
+
+      }
+      else {
+        utils.writeJson(res, {
+          'error':'422 Unprocessable Entity. input is invalid.<br> please confirmed that mid = "-1"',
+          'valid input sample':{
+            "eid": 1,
+            "mid": "-1",
+            "title": "some text.",
+            "question": "some text.",
+            "status": 1,
+            "memo": "some text.",
+            "eventTime": "2018-09-28 16:00:00",
+            "log": "createTime::20180928-211300,updateTime::20181030-110321",
+            "needToRead": "some text."
+          },
+          'getting invalid input':event
+        },422);
+      }
+
+
+
+
+
+
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+function updateEvent(eventData,nextstep){
+  const connection = new sql('CALS');
+  //UPDATE `event` SET `title` = 'something' WHERE `event`.`eid` = 1;
+  eventData['memo'] = textfilter.sqlFilter(eventData['memo']);
+  eventData['question'] = textfilter.sqlFilter(eventData['question']);
+  eventData['title'] = textfilter.sqlFilter(eventData['title']);
+  eventData['log'] = textfilter.sqlFilter(eventData['log']);
+  eventData['needToRead'] = textfilter.sqlFilter(eventData['needToRead']);
+  //var querytext = "INSERT INTO `event` (`eid`, `mid`, `title`, `question`, `status`, `memo`, `eventTime`, `log`,`needToRead`) VALUES (null, '"+eventData['mid']+"', '"+eventData['title']+"', '"+eventData['question']+"', '"+eventData['status']+"', '"+eventData['memo']+"', '"+eventData['eventTime']+"', '"+eventData['log']+"','"+eventData['needToRead']+"');";
+  var querytext = "UPDATE `event` SET `title` = '"+eventData['title']+"',`memo` = '"+eventData['memo']+"',`question` = '"+eventData['question']+"',`log` = '"+eventData['log']+"',`needToRead` = '"+eventData['needToRead']+"',`status` = '"+eventData['status']+"' WHERE `event`.`eid` = "+eventData['eid']+";";
+
+  console.log(querytext);
+  connection.query(querytext, function(returnValue) {
+      nextstep(returnValue);
+  });
+}

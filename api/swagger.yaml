@@ -118,6 +118,22 @@ paths:
         200:
           description: "OK"
       x-swagger-router-controller: "Event"
+    put:
+      tags:
+      - "event"
+      summary: "creating a event"
+      description: ""
+      operationId: "eventPUT"
+      parameters:
+      - in: "body"
+        name: "event"
+        required: false
+        schema:
+          $ref: "#/definitions/event"
+      responses:
+        200:
+          description: "OK"
+      x-swagger-router-controller: "Event"
     options:
       tags:
       - "event"
