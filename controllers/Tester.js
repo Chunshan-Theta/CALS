@@ -93,8 +93,9 @@ function insertTester(testerData,nextstep){
   const connection = new sql('CALS');
   console.log(testerData['mail']);
   testerData['mail'] = textfilter.sqlFilter(testerData['mail']);
+  testerData['log'] = textfilter.sqlFilter(testerData['log']);
   var tid  =testerData['eid']+'-'+testerData['mail'];
-  var querytext = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `Log`, `questionAnswer`) VALUES ('"+tid+"', '"+testerData['eid']+"', NULL, '{}', '"+testerData['questionAnswer']+"');";
+  var querytext = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `Log`, `questionAnswer`) VALUES ('"+tid+"', '"+testerData['eid']+"', NULL, '"+testerData['log']+"', '"+testerData['questionAnswer']+"');";
   console.log(querytext);
   connection.query(querytext, function(returnValue) {
       nextstep(returnValue);
@@ -133,7 +134,7 @@ function reInsertTester(testers,nextstep){
     var unitTid = unitTester['eid']+"-"+unitTester['mail'];
     deleteSql +=" OR `tester`.`tid` = '"+unitTid+"'";
 
-    reInsertSql += '("'+unitTid+'", '+unitTester['eid']+', "'+unitTester['chatroomTag']+'", "'+unitTester['Log']+'", "'+unitTester['questionAnswer']+'"),';
+    reInsertSql += '("'+unitTid+'", '+unitTester['eid']+', "'+unitTester['chatroomTag']+'", "'+unitTester['log']+'", "'+unitTester['questionAnswer']+'"),';
 
   }
 
