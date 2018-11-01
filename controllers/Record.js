@@ -21,12 +21,13 @@ module.exports.actionTesterPOST = function actionTesterPOST (req, res, next) {
 function insertAction(logs,nextstep){
   const connection = new sql('CALS');
 
-  var querytext = "INSERT INTO `behaviorRcord` (`bid`, `tid`, `Type`, `content`, `log`, `time`) VALUES "
+  var querytext = "INSERT INTO `behaviorRcord` (`bid`, `tid`, `Type`, `content`, `name`, `time`) VALUES "
   for(var i in logs){
     var unitLog = logs[i];
     unitLog['content'] = textfilter.sqlFilter(unitLog['content']);
+    unitLog['name'] = textfilter.sqlFilter(unitLog['name']);
     var unitTid = unitLog['eid']+'-'+unitLog['mail'];
-    querytext += "(NULL, '"+unitTid+"', '"+unitLog['type']+"', '"+unitLog['content']+"', 'NULL', '"+unitLog['time']+"'),";
+    querytext += "(NULL, '"+unitTid+"', '"+unitLog['type']+"', '"+unitLog['content']+"', '"+unitLog['name']+"', '"+unitLog['time']+"'),";
   }
 
   querytext = querytext.substring(0,querytext.length-1);

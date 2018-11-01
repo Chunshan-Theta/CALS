@@ -372,12 +372,15 @@ definitions:
         type: "string"
       time:
         type: "string"
+      name:
+        type: "string"
     example:
       mail: "gavin19950511@gmail.com"
       eid: 1
       type: "read"
       content: "title of reading"
       time: "2018-10-21 03:32:54"
+      name: "Gavin"
   respondsOfLog:
     type: "object"
     properties:
@@ -389,8 +392,11 @@ definitions:
         type: "string"
       time:
         type: "string"
+      name:
+        type: "string"
     example:
       tid: "1-gavin19950511@gmail.com"
       type: "read"
       content: "title of reading"
       time: "2018-10-21 03:32:54"
+      name: "Gavin"
