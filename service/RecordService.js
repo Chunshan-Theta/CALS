@@ -19,3 +19,9 @@ exports.actionTesterGET = function(eid,mail,beforeTime) {
     resolve();
   });
 }
+
+exports.actionTesterOPTIONS = function() {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
