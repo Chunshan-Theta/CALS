@@ -10,7 +10,8 @@ info:
     email: "gavin19950511@gmail.com"
   license:
     name: "Apache 2.0"
-host: "localhost:3081"
+
+host: "140.115.126.20:3081"
 basePath: "/CLAS"
 tags:
 - name: "teacher"
@@ -381,12 +382,15 @@ definitions:
         type: "string"
       time:
         type: "string"
+      name:
+        type: "string"
     example:
       mail: "gavin19950511@gmail.com"
       eid: 1
       type: "read"
       content: "title of reading"
       time: "2018-10-21 03:32:54"
+      name: "Gavin"
   respondsOfLog:
     type: "object"
     properties:
@@ -398,8 +402,11 @@ definitions:
         type: "string"
       time:
         type: "string"
+      name:
+        type: "string"
     example:
       tid: "1-gavin19950511@gmail.com"
       type: "read"
       content: "title of reading"
       time: "2018-10-21 03:32:54"
+      name: "Gavin"
