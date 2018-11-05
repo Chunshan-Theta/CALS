@@ -261,6 +261,16 @@ paths:
           description: "OK"
       x-swagger-router-controller: "Record"
 
+    options:
+      tags:
+      - "record"
+      summary: "for responds to the complex requests from browser."
+      description: ""
+      operationId: "actionTesterOPTIONS"
+      responses:
+        200:
+          description: "OK"
+      x-swagger-router-controller: "Record"
 definitions:
   member:
     type: "object"

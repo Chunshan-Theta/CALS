@@ -91,3 +91,21 @@ function selectActionBymail(eid,mail,beforeTime,nextstep){
       nextstep(returnValue);
   });
 }
+/////////////////////////////
+module.exports.actionTesterOPTIONS = function actionTesterOPTIONS (req, res, next) {
+
+  Tester.actionTesterOPTIONS()
+    .then(function (response) {
+      utils.writeJson(res, {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+        "Access-Control-Allow-Headers": "X-PINGOTHER, Content-Type",
+        "Access-Control-Max-Age":"86400"
+      });
+
+
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
