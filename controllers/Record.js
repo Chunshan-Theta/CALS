@@ -95,7 +95,7 @@ function selectActionBymail(eid,mail,beforeTime,nextstep){
 /////////////////////////////
 module.exports.actionTesterOPTIONS = function actionTesterOPTIONS (req, res, next) {
 
-  Tester.actionTesterOPTIONS()
+  Record.actionTesterOPTIONS()
     .then(function (response) {
       utils.writeJson(res, {
         "Access-Control-Allow-Origin": "*",
