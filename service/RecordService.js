@@ -25,3 +25,8 @@ exports.actionTesterOPTIONS = function() {
     resolve();
   });
 }
+exports.actionChatroomGET = function(chatroomTag) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}

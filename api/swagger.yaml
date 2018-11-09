@@ -11,7 +11,7 @@ info:
   license:
     name: "Apache 2.0"
 
-host: "140.115.126.20:3081"
+host: "localhost:3081"
 basePath: "/CLAS"
 tags:
 - name: "teacher"
@@ -235,6 +235,11 @@ paths:
         description: "format like this 2018-10-21 23:59:59"
         required: false
         type: "string"
+      - name: "recordType"
+        in: "query"
+        description: ""
+        required: false
+        type: "string"
       responses:
         200:
           description: "OK"
@@ -272,6 +277,29 @@ paths:
         200:
           description: "OK"
       x-swagger-router-controller: "Record"
+  /action/chatroom:
+    get:
+      tags:
+      - "record"
+      summary: ""
+      description: ""
+      operationId: "actionChatroomGET"
+      parameters:
+      - name: "chatroomTag"
+        in: "query"
+        description: ""
+        required: true
+        type: "string"
+
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/respondsOfLog"
+      x-swagger-router-controller: "Record"
+
 definitions:
   member:
     type: "object"
