@@ -119,10 +119,11 @@ module.exports.actionTesterOPTIONS = function actionTesterOPTIONS (req, res, nex
 
 module.exports.actionChatroomGET = function actionChatroomGET (req, res, next) {
   var chatroomTag = req.swagger.params['chatroomTag'].value;
+  var eid = req.swagger.params['eid'].value;
   console.log("chatroomTag",chatroomTag);
-  Record.actionChatroomGET(chatroomTag)
+  Record.actionChatroomGET(chatroomTag,eid)
     .then(function (response) {
-      selectActionByChatroomTag(chatroomTag,function(re){
+      selectActionByChatroomTag(chatroomTag,eid,function(re){
         utils.writeJson(res, re);
       });
     })
@@ -131,12 +132,14 @@ module.exports.actionChatroomGET = function actionChatroomGET (req, res, next) {
     });
 };
 
-function selectActionByChatroomTag(Tag,nextstep){
+function selectActionByChatroomTag(Tag,eid,nextstep){
   //SELECT `behaviorRcord`.*,`tester`.`chatroomTag` FROM `behaviorRcord`,`tester` WHERE `tester`.`chatroomTag`='2' AND `behaviorRcord`.`tid`=`tester`.`tid` ORDER BY `bid` DESC
+  //SELECT `behaviorRcord`.*,`tester`.`chatroomTag` FROM `behaviorRcord`,`tester` WHERE `tester`.`chatroomTag`='2' AND `tester`.`eid` ='1' AND `behaviorRcord`.`tid`=`tester`.`tid` ORDER BY `bid` DESC
+
   console.log("chatroomTag",Tag);
   const connection = new sql('CALS');
   console.log("chatroomTag",Tag);
-  var querytext = "SELECT `behaviorRcord`.*,`tester`.`chatroomTag` FROM `behaviorRcord`,`tester` WHERE `tester`.`chatroomTag`='"+Tag+"' AND `behaviorRcord`.`tid`=`tester`.`tid` ORDER BY `behaviorRcord`.`time` ASC";
+  var querytext = "SELECT `behaviorRcord`.*,`tester`.`chatroomTag` FROM `behaviorRcord`,`tester` WHERE `tester`.`chatroomTag`='"+Tag+"' AND `tester`.`eid` ='"+eid+"' AND `behaviorRcord`.`tid`=`tester`.`tid` ORDER BY `behaviorRcord`.`time` ASC";
   console.log(querytext);
 
 
