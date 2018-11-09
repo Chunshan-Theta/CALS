@@ -11,7 +11,7 @@ info:
   license:
     name: "Apache 2.0"
 
-host: "localhost:3081"
+host: "140.115.126.20:3081"
 basePath: "/CLAS"
 tags:
 - name: "teacher"
