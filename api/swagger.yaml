@@ -290,7 +290,11 @@ paths:
         description: ""
         required: true
         type: "string"
-
+      - name: "eid"
+        in: "query"
+        description: ""
+        required: true
+        type: "integer"
       responses:
         200:
           description: "OK"
