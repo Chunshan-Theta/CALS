@@ -4,6 +4,9 @@ var utils = require('../utils/writer.js');
 var Record = require('../service/RecordService');
 var sql = require('./tool/mysql_con.js');
 var textfilter = require('./tool/textFilter.js');
+
+
+//////////////////////
 module.exports.actionTesterPOST = function actionTesterPOST (req, res, next) {
   var logs = req.swagger.params['logs'].value;
   Record.actionTesterPOST(logs)
@@ -145,6 +148,38 @@ function selectActionByChatroomTag(Tag,eid,nextstep){
 
 
 
+  connection.query(querytext, function(returnValue) {
+      nextstep(returnValue);
+  });
+}
+
+
+
+
+
+
+////////////////////////////////////////////////////////////
+
+module.exports.actionTesterDELETE = function actionTesterDELETE (req, res, next) {
+  var bid = req.swagger.params['bid'].value;
+  Record.actionTesterDELETE(bid)
+    .then(function (response) {
+      DeleteActionBybid(bid,function(re){
+
+            utils.writeJson(res, re);
+        });
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+//DELETE FROM `behaviorRcord` WHERE `behaviorRcord`.`bid` = 1
+function DeleteActionBybid(bid,nextstep){
+  const connection = new sql('CALS');
+  var querytext = "DELETE FROM `behaviorRcord` WHERE `behaviorRcord`.`bid` = "+bid;
+
+
+  console.log(querytext);
   connection.query(querytext, function(returnValue) {
       nextstep(returnValue);
   });

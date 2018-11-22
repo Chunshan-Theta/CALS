@@ -266,7 +266,23 @@ paths:
         200:
           description: "OK"
       x-swagger-router-controller: "Record"
+    delete:
+      tags:
+      - "record"
+      summary: ""
+      description: ""
+      operationId: "actionTesterDELETE"
+      parameters:
+      - name: "bid"
+        in: "query"
+        description: ""
+        required: true
+        type: "integer"
 
+      responses:
+        200:
+          description: "OK"
+      x-swagger-router-controller: "Record"
     options:
       tags:
       - "record"

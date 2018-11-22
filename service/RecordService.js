@@ -30,3 +30,9 @@ exports.actionChatroomGET = function(chatroomTag,eid) {
     resolve();
   });
 }
+
+exports.actionTesterDELETE = function(bid) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
