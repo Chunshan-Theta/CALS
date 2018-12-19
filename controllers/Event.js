@@ -59,7 +59,7 @@ module.exports.eventPOST = function eventPOST (req, res, next) {
   Event.eventPOST(event)
     .then(function (response) {
       console.log("POST");
-      console.log(event);
+      //console.log(event);
       if(event["eid"] == 0){
         insertEvent(event,function(re){
             utils.writeJson(res, re);

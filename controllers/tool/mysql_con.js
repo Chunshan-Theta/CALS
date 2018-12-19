@@ -30,8 +30,8 @@ module.exports = function (db){
       con.connect(function(err) {
         if (err) throw err;
         con.query(sql, function (err, result, fields) {
-
-          console.log(result);
+          console.log("follow sql command done:")
+          console.log(sql);
           close(con)
           if (err){
             callback(err,"bad request");

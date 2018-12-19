@@ -7,18 +7,19 @@ var textfilter = require('./tool/textFilter.js');
 
 /////////////////////////////////////////////
 module.exports.testerGET = function testerGET (req, res, next) {
+  console.log("request tester Get module.");
   var eid = req.swagger.params['eid'].value;
   var mail = req.swagger.params['mail'].value;
   Tester.testerGET(eid,mail)
     .then(function (response) {
       if(eid != null && mail != null){
 
-        selectTesterByLogin(eid,mail,function(re){
-            utils.writeJson(res, re);
+        selectTesterByLogin(eid,mail,function(re,httpCode=200){
+            utils.writeJson(res, re, httpCode);
         });
       }else if (eid != null && mail == null) {
-        selectTesterByEid(eid,function(re){
-            utils.writeJson(res, re);
+        selectTesterByEid(eid,function(re,httpCode=200){
+            utils.writeJson(res, re,httpCode);
         });
       }else{
         utils.writeJson(res, {"error":"bad input"} ,400);
@@ -40,11 +41,19 @@ function selectTesterByLogin(eid,mail,nextstep){
   const connection = new sql('CALS');
 
   var querytext = "SELECT `tester`.`eid`,`tester`.`chatroomTag`,`tester`.`log`,`tester`.`questionAnswer` FROM `tester` WHERE `tid` ='"+eid+'-'+mail+"'";;
-  console.log(querytext);
+  //console.log(querytext);
   connection.query(querytext, function(returnValue) {
-      returnValue[0]['tid']=null;
-      returnValue[0]['mail']=mail;
-      nextstep(returnValue);
+      
+      try{
+      
+        returnValue[0]['tid'] = null;
+        returnValue[0]['mail'] = mail;
+      
+
+        nextstep(returnValue);
+      }catch(e){
+        nextstep({"error":"not found the user"},400)
+      }
   });
 }
 
@@ -74,7 +83,7 @@ module.exports.testerPOST = function testerPOST (req, res, next) {
 
   Tester.testerPOST(tester)
     .then(function (response) {
-      console.log(tester);
+      console.log("request tester Post module.");
       insertTester(tester,function(re){
 
           utils.writeJson(res, re);
@@ -94,6 +103,7 @@ function insertTester(testerData,nextstep){
   console.log(testerData['mail']);
   testerData['mail'] = textfilter.sqlFilter(testerData['mail']);
   testerData['log'] = textfilter.sqlFilter(testerData['log']);
+
   var tid  =testerData['eid']+'-'+testerData['mail'];
   var querytext = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `log`, `questionAnswer`) VALUES ('"+tid+"', '"+testerData['eid']+"', NULL, '"+testerData['log']+"', '"+testerData['questionAnswer']+"');";
   console.log(querytext);
@@ -162,6 +172,7 @@ module.exports.testerOPTIONS = function testerOPTIONS (req, res, next) {
 
   Tester.testerOPTIONS()
     .then(function (response) {
+      console.log("request tester OPTIONS module");
       utils.writeJson(res, {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
