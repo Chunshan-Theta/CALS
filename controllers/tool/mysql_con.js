@@ -15,8 +15,8 @@ module.exports = function (db){
     */
 
     var host = "140.115.126.20";
-    var user = "theta";
-    var password =  "theta";
+    var user = "thetaserver";
+    var password =  "thetaserver";
 
     var con = mysql.createConnection({
       host: host,
