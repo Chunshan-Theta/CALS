@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 20, 2018 at 03:55 PM
+-- Generation Time: Dec 21, 2018 at 01:46 PM
 -- Server version: 5.7.24-0ubuntu0.16.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -79,7 +79,7 @@ CREATE TABLE `tester` (
   `tid` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'md5(eid-mail)',
   `eid` int(11) NOT NULL,
   `chatroomTag` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Log` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `log` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `questionAnswer` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -127,12 +127,12 @@ ALTER TABLE `behaviorRcord`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `eid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `eid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
