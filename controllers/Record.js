@@ -142,7 +142,7 @@ function selectActionByChatroomTag(Tag,eid,nextstep){
   console.log("chatroomTag",Tag);
   const connection = new sql('CALS');
   console.log("chatroomTag",Tag);
-  var querytext = "SELECT `behaviorRcord`.*,`tester`.`chatroomTag` FROM `behaviorRcord`,`tester` WHERE `tester`.`chatroomTag`='"+Tag+"' AND `tester`.`eid` ='"+eid+"' AND `behaviorRcord`.`tid`=`tester`.`tid` ORDER BY `behaviorRcord`.`time` ASC";
+  var querytext = "SELECT `behaviorRcord`.*,`tester`.`*` FROM `behaviorRcord`,`tester` WHERE `tester`.`chatroomTag`='"+Tag+"' AND `tester`.`eid` ='"+eid+"' AND `behaviorRcord`.`tid`=`tester`.`tid` ORDER BY `behaviorRcord`.`time` ASC";
   console.log(querytext);
 
 

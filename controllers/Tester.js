@@ -138,13 +138,13 @@ function reInsertTester(testers,nextstep){
   //DELETE FROM `tester` WHERE `tester`.`tid` = '1-s6@gmail.com';
   const connection1 = new sql('CALS');
   var deleteSql = "DELETE FROM `tester` WHERE 0";
-  var reInsertSql = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `log`, `questionAnswer`) VALUES ";
+  var reInsertSql = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `log`, `questionAnswer`,`icon`) VALUES ";
   for(var i in testers){
     var unitTester = testers[i];
     var unitTid = unitTester['eid']+"-"+unitTester['mail'];
     deleteSql +=" OR `tester`.`tid` = '"+unitTid+"'";
 
-    reInsertSql += '("'+unitTid+'", '+unitTester['eid']+', "'+unitTester['chatroomTag']+'", "'+unitTester['log']+'", "'+unitTester['questionAnswer']+'"),';
+    reInsertSql += '("'+unitTid+'", '+unitTester['eid']+', "'+unitTester['chatroomTag']+'", "'+unitTester['log']+'", "'+unitTester['questionAnswer']+'","'+unitTester['icon']+'"),';
 
   }
 
