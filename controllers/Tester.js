@@ -40,7 +40,7 @@ function selectTesterByLogin(eid,mail,nextstep){
   ////SELECT `event`.* FROM `member`,`event` WHERE `member`.`mid`=`event`.`mid` AND `member`.`account` = 'gavin1995011@gmail.com'
   const connection = new sql('CALS');
 
-  var querytext = "SELECT `tester`.`eid`,`tester`.`chatroomTag`,`tester`.`log`,`tester`.`questionAnswer` FROM `tester` WHERE `tid` ='"+eid+'-'+mail+"'";;
+  var querytext = "SELECT `tester`.`*` FROM `tester` WHERE `tid` ='"+eid+'-'+mail+"'";;
   //console.log(querytext);
   connection.query(querytext, function(returnValue) {
       
@@ -104,6 +104,7 @@ function insertTester(testerData,nextstep){
   testerData['mail'] = textfilter.sqlFilter(testerData['mail']);
   testerData['log'] = textfilter.sqlFilter(testerData['log']);
 
+  
   var tid  =testerData['eid']+'-'+testerData['mail'];
   var querytext = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `log`, `questionAnswer`) VALUES ('"+tid+"', '"+testerData['eid']+"', NULL, '"+testerData['log']+"', '"+testerData['questionAnswer']+"');";
   console.log(querytext);
