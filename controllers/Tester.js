@@ -106,7 +106,7 @@ function insertTester(testerData,nextstep){
 
   
   var tid  =testerData['eid']+'-'+testerData['mail'];
-  var querytext = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `log`, `questionAnswer`) VALUES ('"+tid+"', '"+testerData['eid']+"', NULL, '"+testerData['log']+"', '"+testerData['questionAnswer']+"');";
+  var querytext = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `log`, `questionAnswer`,`icon`,`passwords`,`forget`) VALUES ('"+tid+"', '"+testerData['eid']+"', NULL, '"+testerData['log']+"', '"+testerData['questionAnswer']+"','"+testerData['icon']+"','"+testerData['passwords']+"','"+testerData['forget']+"');";
   console.log(querytext);
   connection.query(querytext, function(returnValue) {
       nextstep(returnValue);
@@ -139,13 +139,13 @@ function reInsertTester(testers,nextstep){
   //DELETE FROM `tester` WHERE `tester`.`tid` = '1-s6@gmail.com';
   const connection1 = new sql('CALS');
   var deleteSql = "DELETE FROM `tester` WHERE 0";
-  var reInsertSql = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `log`, `questionAnswer`,`icon`) VALUES ";
+  var reInsertSql = "INSERT INTO `tester` (`tid`, `eid`, `chatroomTag`, `log`, `questionAnswer`,`icon`,`passwords`,`forget`) VALUES ";
   for(var i in testers){
     var unitTester = testers[i];
     var unitTid = unitTester['eid']+"-"+unitTester['mail'];
     deleteSql +=" OR `tester`.`tid` = '"+unitTid+"'";
 
-    reInsertSql += '("'+unitTid+'", '+unitTester['eid']+', "'+unitTester['chatroomTag']+'", "'+unitTester['log']+'", "'+unitTester['questionAnswer']+'","'+unitTester['icon']+'"),';
+    reInsertSql += '("'+unitTid+'", '+unitTester['eid']+', "'+unitTester['chatroomTag']+'", "'+unitTester['log']+'", "'+unitTester['questionAnswer']+'","'+unitTester['icon']+'","'+unitTester['passwords']+'","'+unitTester['forget']+'"),';
 
   }
 

@@ -14,7 +14,7 @@ module.exports = function (db){
     // coding: gavin
     */
 
-    var host = "140.115.126.20";
+    var host = "localhost";
     var user = "thetaserver";
     var password =  "thetaserver";
 

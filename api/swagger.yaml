@@ -403,6 +403,9 @@ definitions:
       chatroomTag: "23"
       log: ""
       questionAnswer: 0
+      icon: "./sample.png"
+      passwords: ""
+      forget: ""
   testers:
     properties:
       mail:
@@ -417,6 +420,15 @@ definitions:
         type: "integer"
         description: "only using 1,0 to identify tester (student) now. But in future\
           \ could be complexified."
+    example:
+      mail: "xxx@mail.com"
+      eid: 1
+      chatroomTag: "23"
+      log: ""
+      questionAnswer: 0
+      icon: "./wwwww.png"
+      passwords: "123"
+      forget: "222"
   log:
     type: "object"
     properties:
