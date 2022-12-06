@@ -14,7 +14,7 @@
   "private": true,
   "dependencies": {
     "connect": "^3.2.0",
-    "js-yaml": "^3.3.0",
+    "js-yaml": "^3.14.0",
     "md5": "^2.2.1",
     "mysql": "^2.16.0",
     "reverse-md5": "0.0.4",

@@ -40,7 +40,7 @@ function selectTesterByLogin(eid,mail,nextstep){
   ////SELECT `event`.* FROM `member`,`event` WHERE `member`.`mid`=`event`.`mid` AND `member`.`account` = 'gavin1995011@gmail.com'
   const connection = new sql('CALS');
 
-  var querytext = "SELECT `tester`.`*` FROM `tester` WHERE `tid` ='"+eid+'-'+mail+"'";;
+  var querytext = "SELECT * FROM `tester` WHERE `tid` ='"+eid+'-'+mail+"'";
   //console.log(querytext);
   connection.query(querytext, function(returnValue) {
       
@@ -61,7 +61,7 @@ function selectTesterByEid(eid,nextstep){
   ////SELECT `event`.* FROM `member`,`event` WHERE `member`.`mid`=`event`.`mid` AND `member`.`account` = 'gavin1995011@gmail.com'
   const connection = new sql('CALS');
 
-  var querytext = "SELECT * FROM `tester` WHERE `eid` ='"+eid+"'";;
+  var querytext = "SELECT * FROM `tester` WHERE `eid` ='"+eid+"'";
   console.log(querytext);
   connection.query(querytext, function(returnValue) {
       for(var i in returnValue){

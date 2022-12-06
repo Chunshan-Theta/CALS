@@ -14,8 +14,6 @@ info:
 host: "140.115.126.20:3081"
 basePath: "/CLAS"
 tags:
-- name: "aiFeedback"
-  description: "aiFeedback are the analysis data."
 - name: "teacher"
   description: "teachers are the main user of this system."
 - name: "event"
@@ -29,53 +27,6 @@ tags:
 schemes:
 - "http"
 paths:
-  /aiFeedback:
-    get:
-      tags:
-      - "aiFeedback"
-      summary: "getting data of aiFeedback."
-      description: "usually for getting a aiFeedback's data."
-      operationId: "aiFeedbackGET"
-      parameters:
-      - name: "bid"
-        in: "query"
-        description: "bid"
-        required: false
-        type: "string"
-      responses:
-        200:
-          description: "OK"
-          schema:
-            $ref: "#/definitions/aifeedback"
-      x-swagger-router-controller: "AiFeedback"
-    post:
-      tags:
-      - "aiFeedback"
-      summary: "create a aiFeedback."
-      description: "create a aiFeedback."
-      operationId: "aiFeedbackPOST"
-      parameters:
-      - in: "body"
-        name: "aifeedback"
-        required: false
-        schema:
-          type: "array"
-          items:          
-            $ref: "#/definitions/aifeedback"              
-      responses:
-        200:
-          description: "OK"               
-      x-swagger-router-controller: "AiFeedback"
-    options:
-      tags:
-      - "aiFeedback"
-      summary: "for responds to the complex requests from browser."
-      description: ""
-      operationId: "aiFeedbackOPTIONS"
-      responses:
-        200:
-          description: "OK"
-      x-swagger-router-controller: "AiFeedback"
   /member:
     get:
       tags:
@@ -371,18 +322,6 @@ paths:
               $ref: "#/definitions/respondsOfLog"
       x-swagger-router-controller: "Record"
 definitions:
-  aifeedback:
-    type: "object"
-    properties:
-      bid:
-        type: "string"
-        description: "bid"
-      feedbacktype:
-        type: "string"
-    description: "aiFeedback object. containing aiFeedback's data"
-    example:
-      bid: "123"
-      feedbackType: "type"
   member:
     type: "object"
     properties:
